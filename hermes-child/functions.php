@@ -14,20 +14,20 @@ function hermes_child_scripts_styles(){
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css' );
 }
 
-if( ! function_exists('luxelink_shop_display_post_meta') ) : 
-	function luxelink_shop_display_post_meta() {
+if( ! function_exists('luxelink_shop_display_post_meta2') ) : 
+function luxelink_shop_display_post_meta2() {
 
-		global $product;
-		
-		// replace the custom field name with your own
-		$condition = $product->get_attribute( 'CONDITION' );
-		
+	global $product;
+	// replace the custom field name with your own
+	$condition = $product->get_attribute( 'CONDITION' );
+  	$lengthOfUse=$product->get_attribute('Length of Use');
+	
 
-	  // Add these fields to the shop loop if set
-		if ( ! empty( $condition ) ) {
-			echo '<div class="product-meta" align="left"><h3 style="color:#e16912">CONDITION: ' . ucwords( $condition ) .  '</h3></div>';
-		}
-
+  // Add these fields to the shop loop if set
+	if ( ! empty( $condition ) ) {
+		echo '<div class="product-meta" align="left" data-toggle="tooltip" title="'.$lengthOfUse.'"><h3 style="color:#e16912">CONDITION: ' . ucwords( $condition ) .  '</h3></div>';
 	}
-	add_action( 'woocommerce_after_shop_loop_item', 'luxelink_shop_display_post_meta', 0 );
+
+}
+add_action( 'woocommerce_after_shop_loop_item', 'luxelink_shop_display_post_meta2', 0 );
 endif;
